@@ -60,6 +60,51 @@ This project aims to develop an interactive web platform that allows users to ma
 - **Additional Image Processing**: Rotation, cropping, histogram adjustments, color inversion, binary thresholding.
 - **Responsive Interface**: The interface adapts to all devices (desktops, tablets, and mobiles).
 
+
+## TESTING
+
+### 1. **Interface of the Application**
+
+This is an image showcasing the user interface of the web application. It allows users to interact with the system, upload images, apply filters, and see the results in real-time.
+
+![Interface](image/interface.jpg)
+
+### 2. **Uploading an Image**
+
+In this image, we demonstrate how users can upload an image to the platform for processing. The application provides an easy-to-use interface for loading images, which can then be modified using various image processing techniques.
+
+![Upload Image](image/upload.jpg)
+
+### 3. **Adding Noise to an Image**
+
+Here, an example image is shown after noise has been added. This demonstrates the effect of noise (such as Gaussian noise, salt-and-pepper, etc.) on an image. The platform allows users to add different types of noise to explore their effects on image quality.
+
+![Image with Noise](image/filtrage_image_bruit.jpg)
+
+### 4. **Edge Detection Using Sobel Filter**
+
+This image shows the result of applying the Sobel filter for edge detection. The Sobel filter is a commonly used edge detection operator that helps identify contours and boundaries in an image, highlighting the areas where significant changes in intensity occur.
+
+![Sobel Filter](image/sobel.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Installation
 
 ### Prerequisites
