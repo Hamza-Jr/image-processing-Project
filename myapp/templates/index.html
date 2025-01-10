@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing Interface</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            margin-bottom: 50px;
+        }
+        .navbar {
+            background-color: #004d00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .navbar h1 {
+            color: #fff;
+            margin: 0;
+            
+        }
+        
+        
+        .container-fluid {
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-header {
+            background-color: #004d00;
+            color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-custom {
+            background-color: #004d00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+        .btn-custom:hover {
+            background-color: #003300;
+            color: #f4f4f4;
+        }
+        footer {
+            background-color: #004d00;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer pre{
+           
+            color: hsl(0, 0%, 100%);
+            text-align: center;
+            size: 40px;
+            
+          
+           
+        }
+        .img-container {
+            position: relative;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            padding: 10px;
+            min-height: 300px;
+        }
+        .img-container img {
+            border-radius: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+        .form-check-label {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+{% load static %}
+<body>
+    <nav class="navbar navbar-expand-lg  text-center">
+        <a class="navbar-brand " href="#">
+            <h1>Projet  Traitement  Image  </h1>
+        </a>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 mb-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Ajouter bruit
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="gaussian" value="form1" {{ s1 }}>
+                            <label class="form-check-label" for="gaussian">
+                                Gaussian Noise
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="gaussian0" value="form2" {{ s2 }}>
+                            <label class="form-check-label" for="gaussian0">
+                                Salt and Pepper Noise
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="gaussian1" value="form3" {{ s3 }}>
+                            <label class="form-check-label" for="gaussian1">
+                                Poisson Noise
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="gaussian2" value="form4" {{ s4 }}>
+                            <label class="form-check-label" for="gaussian2">
+                                Speckle Noise
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="pepperSalt3" value="form5" {{ s5 }}>
+                            <label class="form-check-label" for="pepperSalt3">
+                                Impulse Noise
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="pepperSalt4" value="form6" {{ s6 }}>
+                            <label class="form-check-label" for="pepperSalt4">
+                                Quantization Noise
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="pepperSalt5" value="form7" {{ s7 }}>
+                            <label class="form-check-label" for="pepperSalt5">
+                                Periodic Noise
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 10px;">
+                    <div class="card-header text-center">
+                        Image initiale
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="image_originale" value="form8" {{ s8 }}>
+                            <label class="form-check-label" for="image_originale">
+                                image originale 
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="noise" id="originale_grise" value="form9" {{ s9 }}>
+                            <label class="form-check-label" for="originale_grise">
+                                image originale grise
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 text-center mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-custom">Rotate</button>
+                        <button class="btn btn-custom">Crop</button>
+                        <button class="btn btn-custom">Add Text</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Image Preprocessing</h5>
+                                {% if alert %}
+                                <div class="alert alert-danger" role="alert">
+                                    <i class="fa-solid fa-triangle-exclamation" style="margin-right: 10px;"></i>File format is invalid
+                                </div>
+                                {% endif %}
+                                <div class="img-container">
+                                    <div  id="loader" style="position: absolute; display: none; justify-content: center; align-items: center;top: 0; left: 0; bottom: 0; right: 0; background-color: #000000cd; z-index: 1000;">
+                                        <img src="{% static 'my_images/sloader.svg' %}" width="50px" />
+                                    </div>
+                                    <img id="original-image" src="{% static image_noise_path %}">
+                                </div>
+                                <form  id="imageUploadForm" method="post" enctype="multipart/form-data" action="/upload/">
+                                    {% csrf_token %}
+                                    <input type="file" class="btn btn-custom" id="upload-image" name="image" accept="image/*" style="max-width: 100%; width: 100%;">
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Résultat</h5>
+                                <div class="img-container">
+                                    <img id="processed-image" src="{% static image_out_path %}" alt="Processed Image">
+                                </div>
+                                <button id="download-btn" class="btn btn-custom" style="width: 100%;" onclick="downloadImage()">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <select class="form-control" id="filter-select" onchange="showSubFilters(this.value)">
+                            <option value="">Spinner Traitment</option>
+                            <option value="Traitment par point" {% if t1 == "block" %} selected {% endif %}>Traitment par point</option>
+                            <option value="FiltrageS" {% if t2 == "block" %} selected {% endif %}>Filtrage spatial </option>
+                            <option value="FiltrageF" {% if t3 == "block" %} selected {% endif %}>Filtrage fréquentiel </option>
+                            <option value="detection" {% if t4 == "block" %} selected {% endif %}>détection de contours</option>
+                            <option value="Morphologie" {% if t5 == "block" %} selected {% endif %}>Morphologie</option>
+                        </select>
+                    </div>
+                    <div class="card-body" id="sub-filter-options">
+
+  <!-- Traitment par point  tpp-->
+
+                  <div id="tpp" class="todisplay" style="display: {{ t1|default:"none" }};">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="tppid1" name="tpp-filter" value="tpp1" {{ tpp1 }}>
+                        <label class="form-check-label" for="tppid1">
+                            Transformations Exponentielles
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="tppid2" name="tpp-filter" value="tpp2" {{ tpp2 }}>
+                        <label class="form-check-label" for="tppid2">
+                            Transformations Logarithmiques
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="tppid3" name="tpp-filter" value="tpp3" {{ tpp3 }}>
+                        <label class="form-check-label" for="tppid3">
+                            Image inverse(négative)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="tppid4" name="tpp-filter" value="tpp4" {{ tpp4 }}>
+                        <label class="form-check-label" for="tppid4">
+                            Egalisationde l'histogramme
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="tppid5" name="tpp-filter" value="tpp5" {{ tpp5 }}>
+                        <label class="form-check-label" for="tppid5">
+                            Seuillage
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="tppid6" name="tpp-filter" value="tpp6" {{ tpp6 }}>
+                        <label class="form-check-label" for="tppid6">
+                            Recadragede ladynamique
+                        </label>
+                    </div>
+                </div>
+                        
+                 <!-- filtrage spatial  fs-->
+                        <div id="fs" class="todisplay" style="display: {{ t2|default:"none" }};">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid1" name="fs-filter" value="fs1" {{ fs1 }}>
+                                <label class="form-check-label" for="fsid1">
+                                    Moyenneur
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid2" name="fs-filter" value="fs2" {{ fs2 }}>
+                                <label class="form-check-label" for="fsid2">
+                                    Binomial
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid3" name="fs-filter" value="fs3" {{ fs3 }}>
+                                <label class="form-check-label" for="fsid3">
+                                    médian
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid4" name="fs-filter" value="fs4" {{ fs4 }}>
+                                <label class="form-check-label" for="fsid4">
+                                    MinMax
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid5" name="fs-filter" value="fs5" {{ fs5 }}>
+                                <label class="form-check-label" for="fsid5">
+                                    Nearest Neighbor (SNN)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid6" name="fs-filter" value="fs6" {{ fs6 }}>
+                                <label class="form-check-label" for="fsid6">
+                                    filtre de Nagao
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid7" name="fs-filter" value="fs7" {{ fs7 }}>
+                                <label class="form-check-label" for="fsid7">
+                                    Wiener
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="fsid8" name="fs-filter" value="fs8" {{ fs8 }}>
+                                <label class="form-check-label" for="fsid8">
+                                    passe-haut
+                                </label>
+                            </div>
+                        </div>
+
+        <!-- filtrage fruequentiel  ff-->
+
+                        <div id="ff" class="todisplay" style="display: {{ t3|default:"none" }};">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid1" value="ff1" {{ ff1 }}>
+                                <label class="form-check-label" for="ffid1">
+                                    Passe-bas idéal 0|1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid2" value="ff2" {{ ff2 }}>
+                                <label class="form-check-label" for="ffid2">
+                                    Passe-bas idéal 1/2|1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid3" value="ff3" {{ ff3 }}>
+                                <label class="form-check-label" for="ffid3">
+                                    Passe-bas Butterworth
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid4" value="ff4" {{ ff4 }}>
+                                <label class="form-check-label" for="ffid4">
+                                    Passe-bas Gaussien
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid5" value="ff5" {{ ff5 }}>
+                                <label class="form-check-label" for="ffid5">
+                                    Passe-haut idéal 0|1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid6" value="ff6" {{ ff6 }}>
+                                <label class="form-check-label" for="ffid6">
+                                    Passe-haut idéal 1/2|1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid7" value="ff7" {{ ff7 }}>
+                                <label class="form-check-label" for="ffid7">
+                                    Passe-haut Butterworth
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ff-filter" id="ffid8" value="ff8" {{ ff8 }}>
+                                <label class="form-check-label" for="ffid8">
+                                    Passe-haut Gaussien
+                                </label>
+                            </div>
+                        </div>
+<!--detection de compteur  mdc-->
+                        <div id="dc" class="todisplay"  style="display: {{ t4|default:"none" }};">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid1" value="mdc1" {{ mdc1 }}>
+                                <label class="form-check-label" for="dcid1">
+                                    Prewit 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid2" value="mdc2" {{ mdc2 }}>
+                                <label class="form-check-label" for="dcid2">
+                                    Roberts 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid3" value="mdc3" {{ mdc3 }}>
+                                <label class="form-check-label" for="dcid3">
+                                    Sobel 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid4" value="mdc4" {{ mdc4 }}>
+                                <label class="form-check-label" for="dcid4">
+                                    sobel4Direct
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid5" value="mdc5" {{ mdc5 }}>
+                                <label class="form-check-label" for="dcid5">
+                                    gradient
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid6" value="mdc6" {{ mdc6 }}>
+                                <label class="form-check-label" for="dcid6">
+                                    gaussian
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid7" value="mdc7" {{ mdc7 }}>
+                                <label class="form-check-label" for="dcid7">
+                                    laplacian variance
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid8" value="mdc8" {{ mdc8 }}>
+                                <label class="form-check-label" for="dcid8">
+                                    laplacian kirsch
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid9" value="mdc9" {{ mdc9 }}>
+                                <label class="form-check-label" for="dcid9">
+                                    laplacian robinson
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid10" value="mdc10" {{ mdc10 }}>
+                                <label class="form-check-label" for="dcid10">
+                                    local dispersion
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dc-filter" id="dcid11" value="mdc11" {{ mdc11 }}>
+                                <label class="form-check-label" for="dcid11">
+                                    Variance
+                                </label>
+                            </div>
+                        </div>
+<!--Morphologie  mrp1-->
+                        <div id="mrp" class="todisplay" style="display: {{ t5|default:"none" }};">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mrp-filter" id="mrpid1" value="mrp1" {{ mrp1 }}>
+                                <label class="form-check-label" for="mrpid1">
+                                    erosion
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mrp-filter" id="mrpid2" value="mrp2" {{ mrp2 }}>
+                                <label class="form-check-label" for="mrpid2">
+                                    dilation
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mrp-filter" id="mrpid3" value="mrp3" {{ mrp3 }}>
+                                <label class="form-check-label" for="mrpid3">
+                                    ouverture
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mrp-filter" id="mrpid4" value="mrp4" {{ mrp4 }}>
+                                <label class="form-check-label" for="mrpid4">
+                                    tout_ou_rien
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="mrp-filter" id="mrpid5" value="mrp5" {{ mrp5 }}>
+                                <label class="form-check-label" for="mrpid5">
+                                    segmentation_seuillage
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p><pre>  résilier par  : HAMZA EL JRIARI - AYOUB CHHIBAT / encadré par :  mr. Taher Zaki                                                                Master SESN  / FSA Ait Melloul  /  2024-2025 </pre>  </p>
+    </footer> 
+<!-- Ajouter bruit  -->
+    <form class="form-loader" id="form1" method="post" action="/gaussien-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form1">
+    </form>
+    
+    <form class="form-loader" id="form2" method="post" action="/salt-pepper/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form2">
+    </form>
+    
+    <form class="form-loader" id="form3" method="post" action="/poisson-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form3">
+    </form>
+    
+    <form class="form-loader" id="form4" method="post" action="/speckle-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form4">
+    </form>
+
+    <form class="form-loader" id="form5" method="post" action="/impulse-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form5">
+    </form>
+    
+    <form class="form-loader" id="form6" method="post" action="/quantization-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form6">
+    </form>
+    
+    <form class="form-loader" id="form7" method="post" action="/periodic-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form7">
+    </form>
+
+    <form class="form-loader" id="form7" method="post" action="/periodic-noise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form7">
+    </form>
+
+    <!-- revenir à l'image originale-->
+
+    <form class="form-loader" id="form8" method="post" action="/image_original/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form8">
+    </form>
+
+    <form class="form-loader" id="form9" method="post" action="/image_original_grise/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="form9">
+    </form>
+
+
+<!-- Traitment par point  -->
+
+    <form class="form-loader" id="tpp1" method="post" action="/trans-exp/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="tpp1">
+    </form>
+    
+    <form class="form-loader" id="tpp2" method="post" action="/trans-log/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="tpp2">
+    </form>
+    
+    <form class="form-loader" id="tpp3" method="post" action="/inv-image/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="tpp3">
+    </form>
+    
+    <form class="form-loader" id="tpp4" method="post" action="/histo-egal/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="tpp4">
+    </form>
+
+    <form class="form-loader" id="tpp5" method="post" action="/seuillage/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="tpp5">
+    </form>
+    
+    <form class="form-loader" id="tpp6" method="post" action="/dyn-recadrage/">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="tpp6">
+    </form>
+
+<!-- Filtrage Spatial  -->
+
+<form class="form-loader" id="fs1" method="post" action="/Moyenneur/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs1">
+</form>
+
+<form class="form-loader" id="fs2" method="post" action="/Binomial/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs2">
+</form>
+
+<form class="form-loader" id="fs3" method="post" action="/median/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs3">
+</form>
+
+<form class="form-loader" id="fs4" method="post" action="/MinMax/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs4">
+</form>
+
+<form class="form-loader" id="fs5" method="post" action="/Nearest_Neighbor/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs5">
+</form>
+
+<form class="form-loader" id="fs6" method="post" action="/filtre_de_Nagao/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs6">
+</form>
+<form class="form-loader" id="fs7" method="post" action="/Wiener/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs7">
+</form>
+<form class="form-loader" id="fs8" method="post" action="/passe-haut/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="fs8">
+</form>
+
+<!-- Filtrage Frequentiel -->
+<form class="form-loader" id="ff1" method="post" action="/Passe-bas-ideal-0|1/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff1">
+</form>
+
+<form class="form-loader" id="ff2" method="post" action="/Passe-bas-ideal-1/2|1/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff2">
+</form>
+
+<form class="form-loader" id="ff3" method="post" action="/Passe-bas-Butterworth/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff3">
+</form>
+
+<form class="form-loader" id="ff4" method="post" action="/Passe-bas-Gaussien/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff4">
+</form>
+
+<form class="form-loader" id="ff5" method="post" action="/Passe-haut ideal-0|1/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff5">
+</form>
+
+<form class="form-loader" id="ff6" method="post" action="/Passe-haut-ideal-1/2|1/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff6">
+</form>
+<form class="form-loader" id="ff7" method="post" action="/Passe-haut-Butterworth/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff7">
+</form>
+<form class="form-loader" id="ff8" method="post" action="/Passe-haut-Gaussien/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="ff8">
+</form>
+
+<!-- Detection de compteur  -->
+
+<form class="form-loader" id="mdc1" method="post" action="/Prewit/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc1">
+</form>
+
+<form class="form-loader" id="mdc2" method="post" action="/Roberts/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc2">
+</form>
+
+<form class="form-loader" id="mdc3" method="post" action="/Sobel/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc3">
+</form>
+
+<form class="form-loader" id="mdc4" method="post" action="/sobel4Direct/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc4">
+</form>
+
+<form class="form-loader" id="mdc5" method="post" action="/gradient/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc5">
+</form>
+
+<form class="form-loader" id="mdc6" method="post" action="/gaussian/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc6">
+</form>
+<form class="form-loader" id="mdc7" method="post" action="/laplacian-variance/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc7">
+</form>
+<form class="form-loader" id="mdc8" method="post" action="/laplacian-kirsch/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc8">
+</form>
+<form class="form-loader" id="mdc9" method="post" action="/laplacian-robinson/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc9">
+</form>
+<form class="form-loader" id="mdc10" method="post" action="/local-dispersion/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc10">
+</form>
+<form class="form-loader" id="mdc11" method="post" action="/Sobel-gradient/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mdc11">
+</form>
+
+
+
+<!-- Morphologie  -->
+<form class="form-loader" id="mrp1" method="post" action="/erosion/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mrp1">
+</form>
+
+<form class="form-loader" id="mrp2" method="post" action="/dilation/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mrp2">
+</form>
+
+<form class="form-loader" id="mrp3" method="post" action="/ouverture/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mrp3">
+</form>
+
+<form class="form-loader" id="mrp4" method="post" action="/tout_ou_rien/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mrp4">
+</form>
+
+<form class="form-loader" id="mrp5" method="post" action="/segmentation-seuillage/">
+    {% csrf_token %}
+    <input type="hidden" name="form_id" value="mrp5">
+</form>
+
+
+
+
+    <script>
+        const subFilterOptions = document.getElementById('sub-filter-options');
+        document.querySelectorAll('input[name="noise"]').forEach(radio => {
+            const loader = document.getElementById('loader');
+            radio.addEventListener('change', function() {
+                const selectedFormId = this.value;
+                loader.style.display = 'flex';
+                document.getElementById(selectedFormId).submit();
+            });
+        });
+        document.querySelectorAll('input[name="tpp-filter"]').forEach(radio => {
+            const loader = document.getElementById('loader');
+            radio.addEventListener('change', function() {
+                const selectedFormId = this.value;
+                loader.style.display = 'flex';
+                document.getElementById(selectedFormId).submit();
+            });
+        });
+        document.querySelectorAll('input[name="fs-filter"]').forEach(radio => {
+            const loader = document.getElementById('loader');
+            radio.addEventListener('change', function() {
+                const selectedFormId = this.value;
+                loader.style.display = 'flex';
+                document.getElementById(selectedFormId).submit();
+            });
+        });
+        document.querySelectorAll('input[name="ff-filter"]').forEach(radio => {
+            const loader = document.getElementById('loader');
+            radio.addEventListener('change', function() {
+                const selectedFormId = this.value;
+                loader.style.display = 'flex';
+                document.getElementById(selectedFormId).submit();
+            });
+        });
+        document.querySelectorAll('input[name="dc-filter"]').forEach(radio => {
+            const loader = document.getElementById('loader');
+            radio.addEventListener('change', function() {
+                const selectedFormId = this.value;
+                loader.style.display = 'flex';
+                document.getElementById(selectedFormId).submit();
+            });
+        });
+        document.querySelectorAll('input[name="mrp-filter"]').forEach(radio => {
+            const loader = document.getElementById('loader');
+            radio.addEventListener('change', function() {
+                const selectedFormId = this.value;
+                loader.style.display = 'flex';
+                document.getElementById(selectedFormId).submit();
+            });
+        });
+        document.getElementById('upload-image').addEventListener('change', function() {
+            document.getElementById('imageUploadForm').submit();
+        });
+        function showSubFilters(filterType) {
+            document.querySelectorAll('.todisplay').forEach((container) => {
+                container.style.display = 'none';
+            });
+            if (filterType === 'Traitment par point') {
+                document.getElementById('tpp').style.display = "block";
+            } 
+            else if (filterType === 'FiltrageS') {
+                document.getElementById('fs').style.display = "block";
+            }  
+            else if (filterType === 'FiltrageF') {
+                document.getElementById('ff').style.display = "block";
+            }
+            else if (filterType === 'detection') {
+                document.getElementById('dc').style.display = "block";
+            }
+            else if (filterType === 'Morphologie') {
+                document.getElementById('mrp').style.display = "block";
+            }
+        }
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.href = "{% static image_out_path %}";
+            link.download = 'processed_image.png';
+            link.click();
+        }
+    </script>
+</body>
+</html>
