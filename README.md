@@ -3,6 +3,8 @@
 ## Project Description
 This project aims to develop an interactive web platform that allows users to manipulate and explore images using various image processing techniques. The interface enables users to add noise to images, apply spatial and frequency filtering, detect edges, and perform morphological transformations, all while providing an intuitive and educational experience.
 
+This web platform allows users to interactively explore and manipulate images using advanced image processing techniques developed from scratch. Users can add various types of noise (Gaussian, salt-and-pepper, Poisson), apply custom filters (spatial and frequency filtering), detect edges, and perform morphological transformations like erosion, dilation, opening, and closing. The platform also includes additional features such as rotation, cropping, color inversion, and histogram adjustments. All image processing techniques are implemented from scratch to provide a deeper understanding of how these operations work at a fundamental level.
+
 ## Objectives
 - **Add different types of noise to images**:
   - Gaussian noise
