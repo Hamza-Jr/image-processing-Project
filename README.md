@@ -1,4 +1,4 @@
-# Image Processing - Interactive Web Interface
+#  Interactive Image Processing Web Platform (Image Processing from Scratch)
 
 ## Project Description
 This project aims to develop an interactive web platform that allows users to manipulate and explore images using various image processing techniques. The interface enables users to add noise to images, apply spatial and frequency filtering, detect edges, and perform morphological transformations, all while providing an intuitive and educational experience.
